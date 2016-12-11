@@ -97,7 +97,7 @@ public class ChessLogin  implements Runnable
 					{
 						OutputInformation.writeUTF("login"+" "+"success");
 						OutputInformation.flush();
-				  try
+				try
 						{			
 							if(SqlResult!=null)
 							{
@@ -137,7 +137,7 @@ public class ChessLogin  implements Runnable
 					SqlCommand="select * from ChessUser";
 					SqlResult=SqlStatement.executeQuery(SqlCommand);
 
-					RegSuccess=false;
+					RegSuccess=true;
 					while(SqlResult.next())
 					{
 						String CompareUserName=SqlResult.getString("UserName");
@@ -151,10 +151,10 @@ public class ChessLogin  implements Runnable
 					
 						}
 					}
-					if(LoginSuccess==true)
+					if(RegSuccess==true)
 					{
 						SqlCommand="insert into ChessUser values('"+UserName+"','"+Password+"');";
-						SqlResult=SqlStatement.executeQuery(SqlCommand);
+						boolean IsInsert=SqlStatement.execute(SqlCommand);
 						OutputInformation.writeUTF("reg"+" "+"success");
 						OutputInformation.flush();
 						try
@@ -190,8 +190,7 @@ public class ChessLogin  implements Runnable
 						OutputInformation.flush();
 					}
 				}
-			}
-      }			
+			}}			
 			catch (Exception Event)
 			{
 				System.out.println(Event.getMessage());
