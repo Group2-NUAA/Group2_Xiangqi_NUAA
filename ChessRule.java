@@ -1,3 +1,4 @@
+package ce;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 import javax.swing.JLabel;
@@ -5,7 +6,36 @@ import javax.swing.JLabel;
 public class ChessRule {
 	private final int MoveAble=1;
 	private final int MoveLess=0;
-	public void armsRule(int respose, JLabel play, MouseEvent me,Vector Var) {
+	private int x;
+	private int y;
+	private char ch[];
+	private int rank;
+	private String a;
+	public String NextMove(int chessLabel,int x,int y)//
+	{
+		return " ";
+	}
+	int TurnX(int getX)
+	{
+		x=(getX-24)/57;
+		return x;
+	}
+	int TurnY(int getY)
+	{
+		y=(getY-56)/57;
+		return y;
+	}
+	int BackX(int rex)
+	{
+		x=(rex*57)+24;
+		return x;
+	}
+	int BackY(int rey)
+	{
+		y=(rey*57)+56;
+		return y;
+	}
+	public void armsRule(int respose, JLabel play, MouseEvent me,Vector Var,JLabel []chessPieces) {
 		  if (respose < 21)
 		  {
 		   if ((me.getY()-play.getY()) > 27 && (me.getY()-play.getY()) < 86 && (me.getX()-play.getX()) < 55 && (me.getX()-play.getX()) > 0)
@@ -15,11 +45,54 @@ public class ChessRule {
 		    Var.add(String.valueOf(play.getY()));
 		    Var.add(String.valueOf(respose));
 		    play.setBounds(play.getX(),play.getY()+57,55,55);
+		    a=NextMove(respose,TurnX(play.getX()),TurnY(play.getY()+57));
+		    if(a.length()==5)
+			{rank=a.charAt(1);
+			x=a.charAt(2);
+			y=a.charAt(3);
+			}
+		    else
+		    {
+		    	rank=a.charAt(1)*10+a.charAt(2);
+				x=a.charAt(3);
+				y=a.charAt(4);
+		    }
+			chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
 		   }
 		   else if (play.getY() > 284 && (me.getX() - play.getX()) >= 57 && (me.getX() - play.getX()) <= 112)
-		   { play.setBounds(play.getX()+57,play.getY(),55,55); }
+		   {  
+			   play.setBounds(play.getX()+57,play.getY(),55,55); 
+			   a=NextMove(respose,TurnX(play.getX()+57),TurnY(play.getY()));
+			    if(a.length()==5)
+				{rank=a.charAt(1);
+				x=a.charAt(2);
+				y=a.charAt(3);
+				}
+			    else
+			    {
+			    	rank=a.charAt(1)*10+a.charAt(2);
+					x=a.charAt(3);
+					y=a.charAt(4);
+			    }
+			   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
+		   }
 		   else if (play.getY() > 284 && (play.getX() - me.getX()) >= 2 && (play.getX() - me.getX()) <=58)
-		   {play.setBounds(play.getX()-57,play.getY(),55,55);}  
+		   {
+			   play.setBounds(play.getX()-57,play.getY(),55,55);
+			   a=NextMove(respose,TurnX(play.getX()-57),TurnY(play.getY()));
+			    if(a.length()==5)
+				{rank=a.charAt(1);
+				x=a.charAt(2);
+				y=a.charAt(3);
+				}
+			    else
+			    {
+			    	rank=a.charAt(1)*10+a.charAt(2);
+					x=a.charAt(3);
+					y=a.charAt(4);
+			    }
+			   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
+			}  
 		  }
 		  else
 		 {
@@ -29,18 +102,63 @@ public class ChessRule {
 		   Var.add(String.valueOf(respose));
 		  
 		   if ((me.getX()-play.getX()) >= 0 && (me.getX()-play.getX()) <= 55 && (play.getY()-me.getY()) >27 && play.getY()-me.getY() < 86) 
-		   {play.setBounds(play.getX(),play.getY()-57,55,55);}
+		   {
+			   play.setBounds(play.getX(),play.getY()-57,55,55);
+			   a=NextMove(respose,TurnX(play.getX()),TurnY(play.getY()-57));
+			    if(a.length()==5)
+				{rank=a.charAt(1);
+				x=a.charAt(2);
+				y=a.charAt(3);
+				}
+			    else
+			    {
+			    	rank=a.charAt(1)*10+a.charAt(2);
+					x=a.charAt(3);
+					y=a.charAt(4);
+			    }
+			   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
+			}
 		   
 		   else if (play.getY() <= 341 && (me.getX() - play.getX()) >= 57 && (me.getX() - play.getX()) <= 112)
-		   {play.setBounds(play.getX()+57,play.getY(),55,55);} 
+		   {
+			   play.setBounds(play.getX()+57,play.getY(),55,55);
+			   a=NextMove(respose,TurnX(play.getX()+57),TurnY(play.getY()));
+			    if(a.length()==5)
+				{rank=a.charAt(1);
+				x=a.charAt(2);
+				y=a.charAt(3);
+				}
+			    else
+			    {
+			    	rank=a.charAt(1)*10+a.charAt(2);
+					x=a.charAt(3);
+					y=a.charAt(4);
+			    }
+			   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
+			} 
 		   
 		  
 		   else if (play.getY() <= 341 && (play.getX() - me.getX()) >= 3 && (play.getX() - me.getX()) <=58)
-		   {play.setBounds(play.getX()-57,play.getY(),55,55);}
+		   {  
+			   play.setBounds(play.getX()-57,play.getY(),55,55);
+			   a=NextMove(respose,TurnX(play.getX()-57),TurnY(play.getY()));
+			    if(a.length()==5)
+				{rank=a.charAt(1);
+				x=a.charAt(2);
+				y=a.charAt(3);
+				}
+			    else
+			    {
+			    	rank=a.charAt(1)*10+a.charAt(2);
+					x=a.charAt(3);
+					y=a.charAt(4);
+			    }
+			   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
+			}
 		  }
 	}
 	
-	public void cannonRule(JLabel play, JLabel  playQ[], MouseEvent me,Vector Var,int respose) {
+	public void cannonRule(JLabel play, JLabel  playQ[], MouseEvent me,Vector Var,int respose,JLabel []chessPieces) {
 		  int Count = 0; 
 		  if (play.getX() - me.getX() <= 0 && play.getX() - me.getX() >= -55)
 		  {
@@ -71,6 +189,19 @@ public class ChessRule {
 						  Var.add(String.valueOf(play.getY()));
 						  Var.add(String.valueOf(respose));
 						  play.setBounds(play.getX(),i,55,55);
+						   a=NextMove(respose,TurnX(play.getX()),TurnY(i));
+						    if(a.length()==5)
+							{rank=a.charAt(1);
+							x=a.charAt(2);
+							y=a.charAt(3);
+							}
+						    else
+						    {
+						    	rank=a.charAt(1)*10+a.charAt(2);
+								x=a.charAt(3);
+								y=a.charAt(4);
+						    }
+						   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
 						  break;
 					  }
 				} 
@@ -106,15 +237,28 @@ public class ChessRule {
 					  Var.add(String.valueOf(play.getY()));
 					  Var.add(String.valueOf(respose));
 					  play.setBounds(i,play.getY(),55,55);
+					   a=NextMove(respose,TurnX(i),TurnY(play.getY()));
+					    if(a.length()==5)
+						{rank=a.charAt(1);
+						x=a.charAt(2);
+						y=a.charAt(3);
+						}
+					    else
+					    {
+					    	rank=a.charAt(1)*10+a.charAt(2);
+							x=a.charAt(3);
+							y=a.charAt(4);
+					    }
+					   chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
 					  break;
 				  }
 			  }
 		   }
 	}
 		 
-	public void horseRule(JLabel play, JLabel playQ[], MouseEvent me,Vector Var,int respose) {
+	public void horseRule(JLabel play, JLabel playQ[], MouseEvent me,Vector Var,int respose,JLabel []chessPieces) {
 	    	int Ex=0,Ey=0,Move=0; 
-	    	if (play.getX() - me.getX() >= 2 && play.getX() - me.getX() <= 57 && play.getY() - me.getY() >= 87 && play.getY() - me.getY() <= 141)//ä¸Šå·¦
+	    	if (play.getX() - me.getX() >= 2 && play.getX() - me.getX() <= 57 && play.getY() - me.getY() >= 87 && play.getY() - me.getY() <= 141)//ÉÏ×ó
 	    		{
 	    		for (int i=56;i<=571;i+=57)
 	    		    {
@@ -138,10 +282,23 @@ public class ChessRule {
 	    			Var.add(String.valueOf(play.getY()));
 	    			Var.add(String.valueOf(respose));
 	    			play.setBounds(Ex,Ey,55,55);
+	 			    a=NextMove(respose,TurnX(Ex),TurnY(Ey));
+	 			    if(a.length()==5)
+	 				{rank=a.charAt(1);
+	 				x=a.charAt(2);
+	 				y=a.charAt(3);
+	 				}
+	 			    else
+	 			    {
+	 			    	rank=a.charAt(1)*10+a.charAt(2);
+	 					x=a.charAt(3);
+	 					y=a.charAt(4);
+	 			    }
+				    chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
 	    			}
 	    		}
 	    	
-	  else if (play.getY()-me.getY()>=27 && play.getY()-me.getY()<=86 && play.getX()-me.getX()>=70 &&play.getX()-me.getX()<=130)//å·¦ä¸Š
+	  else if (play.getY()-me.getY()>=27 && play.getY()-me.getY()<=86 && play.getX()-me.getX()>=70 &&play.getX()-me.getX()<=130)//×óÉÏ
 	{
 	   for (int i=56;i<=571;i+=57)
 		   {
@@ -169,7 +326,7 @@ public class ChessRule {
 	   }
 	}
 	  
-	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && me.getX()-play.getX()<=87 && me.getX()-play.getX()>=2)//ä¸‹å³
+	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && me.getX()-play.getX()<=87 && me.getX()-play.getX()>=2)//ÏÂÓÒ
 	{ 
 	   for (int i=56;i<=571;i+=57)
 		   {
@@ -195,7 +352,7 @@ public class ChessRule {
 	   }
 }
 	  
-	  else if (play.getY()-me.getY()>=87&&play.getY()-me.getY()<=141&&me.getX()-play.getX()<=87&&me.getX()-play.getX()>=30 )//ä¸Šå³
+	  else if (play.getY()-me.getY()>=87&&play.getY()-me.getY()<=141&&me.getX()-play.getX()<=87&&me.getX()-play.getX()>=30 )//ÉÏÓÒ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -225,7 +382,7 @@ public class ChessRule {
 	   }
 	  
 	  
-	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && play.getX()-me.getX()<=87 && play.getX()-me.getX()>=10 )//ä¸‹å·¦
+	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && play.getX()-me.getX()<=87 && play.getX()-me.getX()>=10 )//ÏÂ×ó
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -252,7 +409,7 @@ public class ChessRule {
 		   play.setBounds(Ex,Ey,55,55);
 		   }
 	   }
-	  else if (play.getY()-me.getY()>=30 && play.getY()-me.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87)//å³ä¸Š
+	  else if (play.getY()-me.getY()>=30 && play.getY()-me.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87)//ÓÒÉÏ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -279,7 +436,7 @@ public class ChessRule {
 	   }
 	   }
 	 
-	  else if (me.getY()-play.getY()>=30 && me.getY()-play.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87) //å³ä¸‹
+	  else if (me.getY()-play.getY()>=30 && me.getY()-play.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87) //ÓÒÏÂ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -306,7 +463,7 @@ public class ChessRule {
 	   }
 	   }
 	  
-	  else if (me.getY() - play.getY() >= 30 && me.getY() - play.getY() <= 87 && play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 )//å·¦ä¸‹
+	  else if (me.getY() - play.getY() >= 30 && me.getY() - play.getY() <= 87 && play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 )//×óÏÂ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -333,10 +490,10 @@ public class ChessRule {
 	  }
 	 }
 	
-	public void elephantRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var) {
+	public void elephantRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var,JLabel []chessPieces) {
 		  int Ex=0,Ey=0,Move=0;
 		 
-		  if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && play.getY() - me.getY() <= 141 && play.getY() - me.getY() >= 87) //ä¸Šå·¦
+		  if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && play.getY() - me.getY() <= 141 && play.getY() - me.getY() >= 87) //ÉÏ×ó
 			  {
 			  for (int i=56;i<=571;i+=57)
 				  {
@@ -410,7 +567,7 @@ public class ChessRule {
 		   }
 		} 
 		    
-		  else if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && me.getY() - play.getY() <= 141 && me.getY() - play.getY() >= 87)//ä¸‹å·¦
+		  else if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && me.getY() - play.getY() <= 141 && me.getY() - play.getY() >= 87)//ÏÂ×ó
 		{
 		   for (int i=56;i<=571;i+=57)
 		   {
@@ -484,7 +641,7 @@ public class ChessRule {
 		  
    }
 
-	public void chapRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var){
+	public void chapRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var,JLabel []chessPieces){
 	  if (me.getX() - play.getX() >= 29 && me.getX() - play.getX() <= 114 && play.getY() - me.getY() >= 25 && play.getY() - me.getY() <= 90)
 		  {
 		  if (respose < 14 && (play.getX()+57) >= 195 && (play.getX()+57) <= 309 && (play.getY()-57) <= 170)
@@ -546,7 +703,7 @@ public class ChessRule {
 		  } 
 	  }
 	
-    public void willRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var){
+    public void willRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var,JLabel []chessPieces){
 		  
 		  if ((me.getX()-play.getX()) >= 0 && (me.getX()-play.getX()) <= 55 && (play.getY()-me.getY()) >=2 && play.getY()-me.getY() <= 87)
 		{
@@ -627,7 +784,7 @@ public class ChessRule {
 		  
 	}
 	
-		 public void armsRule(JLabel play1,JLabel play2,Vector Var,int respose, int i) {
+		 public void armsRule(JLabel play1,JLabel play2,Vector Var,int respose, int i,JLabel []chessPieces) {
 		  if ((play2.getX()-play1.getX())<=112 && (play2.getX()-play1.getX())>=57 && (play1.getY()-play2.getY())<22 && (play1.getY()-play2.getY())>-22 && play2.isVisible() && play1.getName().charAt(1)!=play2.getName().charAt(1))
 		  {
 		   if (play1.getName().charAt(1) == '1' && play1.getY() > 284 && play1.getName().charAt(1) != play2.getName().charAt(1))
@@ -671,7 +828,7 @@ public class ChessRule {
 		  
 		}
 
-		 public void cannonRule(int Chess,int i, JLabel  play, JLabel playTake, JLabel playQ[],Vector Var,int respose,MouseEvent me) 
+		 public void cannonRule(int Chess,int i, JLabel  play, JLabel playTake, JLabel playQ[],Vector Var,int respose,MouseEvent me,JLabel []chessPieces) 
 		 {
 			  int Count = 0;
 			  for (int j=0;j<32;j++){
@@ -733,7 +890,7 @@ public class ChessRule {
 			  }
 			 }
 		 
-		 public void horseRule(JLabel play,JLabel playTake ,JLabel playQ[],MouseEvent me,Vector Var,int respose,int s){
+		 public void horseRule(JLabel play,JLabel playTake ,JLabel playQ[],MouseEvent me,Vector Var,int respose,int s,JLabel []chessPieces){
 		  int Move=0;
 		  boolean Chess=false;
 		  if (play.getName().charAt(1)!=playTake.getName().charAt(1) && play.getX() - playTake.getX() == 57 && play.getY() - playTake.getY() == 114 )
@@ -832,7 +989,7 @@ public class ChessRule {
 		  }
 }
 	 
-		 public void elephantRule(JLabel play,JLabel playTake,JLabel playQ[],Vector Var,int respose,int s){
+		 public void elephantRule(JLabel play,JLabel playTake,JLabel playQ[],Vector Var,int respose,int s,JLabel []chessPieces){
 		  int Move=0;
 		  boolean Chess=false;
 		  
@@ -880,7 +1037,7 @@ public class ChessRule {
 		  }
 	}
 		   
-		 public void chapRule(int respose ,JLabel play,JLabel playTake,JLabel playQ[],Vector Var,int s)
+		 public void chapRule(int respose ,JLabel play,JLabel playTake,JLabel playQ[],Vector Var,int s,JLabel []chessPieces)
 		 {
 		  boolean Chap = false;
 		  
@@ -934,7 +1091,7 @@ public class ChessRule {
 		  
 		 }
 		 	 
-		 public void willRule(int respose ,JLabel play,JLabel playTake ,JLabel playQ[],Vector Var,int s){
+		 public void willRule(int respose ,JLabel play,JLabel playTake ,JLabel playQ[],Vector Var,int s,JLabel []chessPieces){
 			 boolean will = false;
 		  if (play.getX() - playTake.getX() >= 0 && play.getX() - playTake.getX() <= 55 && play.getY() - playTake.getY() >= 27 && play.getY() - playTake.getY() <= 87 && playTake.isVisible()) 
 		{

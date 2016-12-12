@@ -3,6 +3,8 @@ import java.awt.event.MouseEvent;
 import java.util.Vector;
 import javax.swing.JLabel;
 
+
+
 public class PveChessRule {
 	private final int MoveAble=1;
 	private final int MoveLess=0;
@@ -11,10 +13,13 @@ public class PveChessRule {
 	private char ch[];
 	private int rank;
 	private String a;
-	/*public String NextMove(int chessLabel,int x,int y)
-	{
-		return " ";
-	}*/
+	private AI ai;
+	public PveChessRule(){
+		ai=new AI();
+	}
+	void sendflag(){
+		ai.Regret();
+	}
 	int TurnX(int getX)
 	{
 		x=(getX-24)/57;
@@ -258,7 +263,7 @@ public class PveChessRule {
 		 
 	public void horseRule(JLabel play, JLabel playQ[], MouseEvent me,Vector Var,int respose,JLabel []chessPieces) {
 	    	int Ex=0,Ey=0,Move=0; 
-	    	if (play.getX() - me.getX() >= 2 && play.getX() - me.getX() <= 57 && play.getY() - me.getY() >= 87 && play.getY() - me.getY() <= 141)//ä¸Šå·¦
+	    	if (play.getX() - me.getX() >= 2 && play.getX() - me.getX() <= 57 && play.getY() - me.getY() >= 87 && play.getY() - me.getY() <= 141)//ÉÏ×ó
 	    		{
 	    		for (int i=56;i<=571;i+=57)
 	    		    {
@@ -298,7 +303,7 @@ public class PveChessRule {
 	    			}
 	    		}
 	    	
-	  else if (play.getY()-me.getY()>=27 && play.getY()-me.getY()<=86 && play.getX()-me.getX()>=70 &&play.getX()-me.getX()<=130)//å·¦ä¸Š
+	  else if (play.getY()-me.getY()>=27 && play.getY()-me.getY()<=86 && play.getX()-me.getX()>=70 &&play.getX()-me.getX()<=130)//×óÉÏ
 	{
 	   for (int i=56;i<=571;i+=57)
 		   {
@@ -339,7 +344,7 @@ public class PveChessRule {
 	   }
 	}
 	  
-	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && me.getX()-play.getX()<=87 && me.getX()-play.getX()>=2)//ä¸‹å³
+	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && me.getX()-play.getX()<=87 && me.getX()-play.getX()>=2)//ÏÂÓÒ
 	{ 
 	   for (int i=56;i<=571;i+=57)
 		   {
@@ -378,7 +383,7 @@ public class PveChessRule {
 	   }
 }
 	  
-	  else if (play.getY()-me.getY()>=87&&play.getY()-me.getY()<=141&&me.getX()-play.getX()<=87&&me.getX()-play.getX()>=30 )//ä¸Šå³
+	  else if (play.getY()-me.getY()>=87&&play.getY()-me.getY()<=141&&me.getX()-play.getX()<=87&&me.getX()-play.getX()>=30 )//ÉÏÓÒ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -421,7 +426,7 @@ public class PveChessRule {
 	   }
 	  
 	  
-	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && play.getX()-me.getX()<=87 && play.getX()-me.getX()>=10 )//ä¸‹å·¦
+	  else if (me.getY()-play.getY()>=87 && me.getY()-play.getY()<=141 && play.getX()-me.getX()<=87 && play.getX()-me.getX()>=10 )//ÏÂ×ó
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -461,7 +466,7 @@ public class PveChessRule {
 	    chessPieces[rank].setBounds(BackX(x),BackY(y),55,55);
 		   }
 	   }
-	  else if (play.getY()-me.getY()>=30 && play.getY()-me.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87)//å³ä¸Š
+	  else if (play.getY()-me.getY()>=30 && play.getY()-me.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87)//ÓÒÉÏ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -501,7 +506,7 @@ public class PveChessRule {
 	   }
 	   }
 	 
-	  else if (me.getY()-play.getY()>=30 && me.getY()-play.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87) //å³ä¸‹
+	  else if (me.getY()-play.getY()>=30 && me.getY()-play.getY()<=87 && me.getX()-play.getX()<=141 && me.getX()-play.getX()>=87) //ÓÒÏÂ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -541,7 +546,7 @@ public class PveChessRule {
 	   }
 	   }
 	  
-	  else if (me.getY() - play.getY() >= 30 && me.getY() - play.getY() <= 87 && play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 )//å·¦ä¸‹
+	  else if (me.getY() - play.getY() >= 30 && me.getY() - play.getY() <= 87 && play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 )//×óÏÂ
 		  {
 		  for (int i=56;i<=571;i+=57)
 			  {
@@ -584,7 +589,7 @@ public class PveChessRule {
 	public void elephantRule(int respose,JLabel play,JLabel playQ[],MouseEvent me,Vector Var,JLabel []chessPieces) {
 		  int Ex=0,Ey=0,Move=0;
 		 
-		  if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && play.getY() - me.getY() <= 141 && play.getY() - me.getY() >= 87) //ä¸Šå·¦
+		  if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && play.getY() - me.getY() <= 141 && play.getY() - me.getY() >= 87) //ÉÏ×ó
 			  {
 			  for (int i=56;i<=571;i+=57)
 				  {
@@ -710,7 +715,7 @@ public class PveChessRule {
 		   }
 		} 
 		    
-		  else if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && me.getY() - play.getY() <= 141 && me.getY() - play.getY() >= 87)//ä¸‹å·¦
+		  else if (play.getX() - me.getX() <= 141 && play.getX() - me.getX() >= 87 && me.getY() - play.getY() <= 141 && me.getY() - play.getY() >= 87)//ÏÂ×ó
 		{
 		   for (int i=56;i<=571;i+=57)
 		   {
