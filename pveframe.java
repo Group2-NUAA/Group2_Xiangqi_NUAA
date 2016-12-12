@@ -48,7 +48,7 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
     	chatpanel.setBounds(90, 650, 400, 150);
     	mepanel.setBounds(0, 820, 560, 30);
     	
-    	rule =new ChessRule();
+    	rule =new PveChessRule();
     	vec=new Vector();
     	buttonpanel=new JPanel();
     	text=new JLabel("Welcome",JLabel.CENTER);
