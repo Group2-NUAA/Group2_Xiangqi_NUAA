@@ -22,7 +22,8 @@ public class Login extends JFrame implements ActionListener
 	JButton pvp;
     JPanel choosepanel;
 	
-	
+	 ChessUser user;
+    
 	Login()
 	{
 		super("Chinese XiangQi");
@@ -76,13 +77,13 @@ public class Login extends JFrame implements ActionListener
 				informationLabel.setText("account and password can't be null");
 			}
 			else
-				outputinformation("login",account.getText()+password.getText());
+				user.outputinformation("login",account.getText()+password.getText());
 			if(returnCommand=="login success")
 			{
 				new MainFrame();
 				this.setVisible(false);
 			}
-			if(returnCommand=="login failed")
+			if(user.returnCommand=="login failed")
 			{
 				informationLabel.setText("login wrong");
 			}
@@ -94,14 +95,14 @@ public class Login extends JFrame implements ActionListener
 				informationLabel.setText("account and password can't be null");
 			}
 			else
-				outputinformation("reg",account.getText()+password.getText());
-			if(returnCommand=="reg success")
+				user.outputinformation("reg",account.getText()+password.getText());
+			if(user.returnCommand=="reg success")
 			{
 				informationLabel.setText("register success");
 				new MainFrame();
 				this.setVisible(false);
 			}
-			if(returnCommand=="reg failed")
+			if(user.returnCommand=="reg failed")
 			{
 				informationLabel.setText("register failed");
 			}
