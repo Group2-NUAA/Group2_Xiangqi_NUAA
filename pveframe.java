@@ -424,6 +424,7 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 		{
 			try
 			{
+			        user.sendflag();
 				String str=(String)vec.get(vec.size()-4);
 				int x=Integer.parseInt((String)vec.get(vec.size()-3));
 				int y=Integer.parseInt((String)vec.get(vec.size()-2));
