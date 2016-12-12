@@ -57,6 +57,7 @@ public class ServerThread implements Runnable
 						ChessUserVector.removeElement(ChessUserSocket);
 						ChessUserVector.removeElement(OtherChessUserSocket);
 						ChessUserVector.add(OtherChessUserSocket);
+						OtherOutputInformation.writeUTF("seccess");
 						break;
 					}
 				}			
@@ -74,6 +75,7 @@ public class ServerThread implements Runnable
 						ChessUserVector.removeElement(ChessUserSocket);
 						ChessUserVector.removeElement(OtherChessUserSocket);
 						ChessUserVector.add(ChessUserSocket);
+						OutputInformation.writeUTF("seccess");
 						break;
 					}
 				}

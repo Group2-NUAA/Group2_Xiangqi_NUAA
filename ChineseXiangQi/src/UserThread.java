@@ -120,7 +120,7 @@ public class UserThread implements Runnable
 			switch(Command)
 			{	
 				case "leave":
-					OutputInformation.writeUTF("seccess");
+					OutputInformation.writeUTF("leave");
 					OutputInformation.flush();
 					break;
 				case "regret":
