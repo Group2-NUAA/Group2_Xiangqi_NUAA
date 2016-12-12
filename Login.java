@@ -76,7 +76,7 @@ public class Login extends JFrame implements ActionListener
 				informationLabel.setText("account and password can't be null");
 			}
 			else
-				returninformation(account.getText(),password.getText());
+				outputinformation("login",account.getText()+password.getText());
 			if(returnCommand=="login success")
 			{
 				new MainFrame();
@@ -94,7 +94,7 @@ public class Login extends JFrame implements ActionListener
 				informationLabel.setText("account and password can't be null");
 			}
 			else
-				returninformation(account.getText(),password.getText());
+				outputinformation("reg",account.getText()+password.getText());
 			if(returnCommand=="reg success")
 			{
 				informationLabel.setText("register success");
@@ -105,8 +105,6 @@ public class Login extends JFrame implements ActionListener
 			{
 				informationLabel.setText("register failed");
 			}
-			
 		}
-
 	}
 }
