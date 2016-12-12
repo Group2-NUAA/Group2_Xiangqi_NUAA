@@ -51,81 +51,19 @@ Public void QuitGame();
 Public void MovablePlace(Chess ChosenChess);//Show all the movable place of the chess which is chosen.(which based on the chess’s move way and place and ETC.);
 Public void EatChess(Chess Eatchess,Chess Eatenchess)//Call this function when one side’s chess eats another side’s chess;
 
+									
 Noah
-1.	Subsystem:Multiplayer
-2.Class(include function)
-(1)
-public class ChessLogin implements Runnable
-{		//decide what to do when Client log in 
-
-public ChessLogin();					//log in
-public void run();	
-//when Client log in ,allocate the room and start the game
-public void notifyLoginListener();			//add and notify listener
-public String checkLogin();			//check information about user
-public static int byteToInt();				//convert byte type to int type
-}
-(2).
-public class LoginUser{					//the class for user
-public LoginUser() 						//construction
-}
-(3).
-public interface LoginListener
-{	//a interface  about listening to the log
-public void onLoginEvent( );//when a user log in ,the server prepare for the user
-}									
-(4).
-public class ChessServer implements LoginListener
-{	//the class about the whole chess server
-public int addTableUser();					//allocate a table for user 
-public void removeTableUser( );			//when user leaves ,delete the table
-public boolean addUser();			//when a new user join in the server,add 											his information
-public void removeUser( );					//when the user leaves,shut down the connect		
-public void sendToTable( );	//send the user information to the table
-public byte[] getUserListData();	//send the user information to the    server
-public void onUserPackageArrived( );//deal with the quests such as 													talking admitting defeat
-public void onLoginEvent( );	//when a new user log in , initialize the event	
-}										
-(5).
-public class ChessUser implements TcpDataListener
-{		//a class about user informaiton about quests while playing chess in the server
-public ChessUser( )			//construction	
-public boolean init()						//initialize
-public void setState(int)						//set the state of the game
-public void start()							//start the game
-public void onTcpDataArrived()		//send the data to the server
-}
-(6)
-public class TcpDataReceiver extends Thread
-{	//the receiver of tcp data
-public TcpDataReceiver( );	//construction
-public void run();			//receive the stream while playing
-public void addTcpDataListener();			//add tcp data listener
-}
-(7).
-public interface TcpDataListener{					//the listener for the tcp data
-public void onTcpDataArrived( );
-}
-(8).
-public class TcpDataEvent
-{	//the class of package of tcp data 
-public TcpDataEvent()		//construction
-public byte[] getHeader();						//return the private data head
-public byte[] getData();					//return the private data datas
-public int getDataLen();						//return the private data length Sapphire
-(9).
-public class TcpDataSender
-{
-public TcpDataSender( );						//construction
-public void sendData();						//send the tcp data to the server
-}
-(10).
-public class HttpInputStream extends InputStream
-{		//a class ensure that the length of tcp 												data is safe
-public HttpInputStream();					//construction
-
-public static void readBytes( ); 	//check whether the length of the stream is correct
-}										
+I am responsible for the multiplayer mode . I have five classes ,including ChessServer,ChessLogin,ServerThread,ChessUser and UserThread.
+1.ChessServer class
+This class aims to start the server,including functions like “private void init()”,which initializes the class ,construction of the class which listen to the socket from client ,”private void check” which when a client connect to this server ,declare and define a ChessLogin object.
+2.ChessLogin class
+This class aims to check whether the login or the register is valid ,including functions like “private void init()”, which initializes the class and connects to the mysql,construction of the class which use the init() function, thread function named”public void run()” which listen to the client and check whether the login or register is successful or failed and if success and there are two players,declare and define a ServerThread object.
+3.ServerThread
+This class is a listening thread including functions like “private void init()”,which initializes the class,construction of the class which user the init() function ,thread function named “public void run()” which listen to the client and return the information about chess to the other user ,”public void outputInformation()” which if the game started ,send the signal to the players.
+4.ChessUser
+This class aims to start the client,including functions like “private void init()”,which initializes the class and declare and define a UserThread object  ,construction of the class which use the init() function , .
+5.UserThread
+This class is a listening thread,including functions like “private void init()”,which initializes the class ,the construction of the class use the init() function ,the thread function”public void run()” which listen to the server and receive the information from server ,the function “outputInformation” which send information to the server.
 
 ANX
 1.Subsystem: AI
