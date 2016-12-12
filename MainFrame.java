@@ -10,17 +10,11 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 	JLabel chessPieces[]=new JLabel [32];//32 chess pieces
 	JLabel chessBoard;//chessboard
 	JLabel text;//display current information to remind player
-	JLabel me;//chat
 	JButton anew;//start a new game
 	JButton regret;//regret and back 
 	JButton exit;//get out of the game
-	JButton enter;//send the chat information
 	Container con;
     JPanel buttonpanel;//put three button here
-    JPanel mepanel;
-    JPanel chatpanel;
-    JTextField metext;
-    JTextArea chattext;
     boolean blink;//if true,chess piece will blink;if false,it will eat another and stop blink
     Thread thread;//to control blink
     int flag=2;//flag=1,red;flag=2,black;flag=3,both static
@@ -32,28 +26,12 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
     {
     	super("Chinese XiangQi");
     	
-    	enter=new JButton("enter");
-    	enter.addActionListener(this);
-    	me=new JLabel("me:");
-    	metext=new JTextField("",30);
-    	chattext=new JTextArea(100,100);
-    	chattext.setWrapStyleWord (true);
-    	chattext.setLineWrap (true);
-    	//himtext.setText(user.returnChatInformation());
-    	mepanel=new JPanel();
-    	chatpanel=new JPanel();
-    	mepanel.add(me);
-    	mepanel.add(metext);
-    	mepanel.add(enter);
-    	chatpanel.add(chattext);
-    	chatpanel.setBounds(90, 650, 400, 150);
-    	mepanel.setBounds(0, 820, 560, 30);
+    	
     	
     	rule =new ChessRule();
     	vec=new Vector();
     	buttonpanel=new JPanel();
     	text=new JLabel("Welcome",JLabel.CENTER);
-    	
     	anew=new JButton("new game");
     	regret=new JButton("regret");
     	exit=new JButton("exit");
@@ -65,8 +43,6 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
     	con = this.getContentPane();
     	con.setLayout(null);
     	con.add(buttonpanel); 
-    	con.add(mepanel);
-    	con.add(chatpanel);
     	text.setBounds(0, 30, 560, 30);
     	con.add(text);
     	anew.addActionListener(this);
@@ -243,32 +219,6 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 		}
 	}
 	
-    
-	public void moveset(int index,int x, int y)
-	{
-		chessPieces[index].setBounds(x, y, 55, 55);
-	}
-	
-	public void eatset(int firstindex,int secondindex)
-	{
-		chessPieces[secondindex].setVisible(false);
-		chessPieces[firstindex].setBounds(chessPieces[secondindex].getX(),chessPieces[secondindex].getY(),55,55);
-	}
-	
-	public String movereturn(int index,int x,int y)
-	{
-		String str=null;
-		str="index x y";
-		return str;
-	}
-	
-	public String eatreturn(int firstindex,int secondindex)
-	{
-		String str=null;
-		str="firstindex secondindex";
-		return str;
-	}
-	
 	public void mouseClicked(MouseEvent e)
 	{
 		
@@ -284,7 +234,6 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 			{
 				x=chessPieces[respose].getX();
 				y=chessPieces[respose].getY();
-				movereturn(respose,e.getX(),e.getY());
 				if(respose>15&&respose<26)
 				{
 					rule.armsRule(respose,chessPieces[respose],e,vec);
@@ -327,10 +276,7 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 			else if(flag==1&&chessPieces[respose].getName().charAt(1)=='1')
 			{
 				x=chessPieces[respose].getX();
-				y=chessPieces[respose].getY();
-				movereturn(respose,e.getX(),e.getY());
-				
-				
+				y=chessPieces[respose].getY();		
 				if(respose>15&&respose<26)
 				{
 					rule.armsRule(respose,chessPieces[respose],e,vec);
@@ -428,7 +374,6 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 								rule.willRule(respose,chessPieces[respose],chessPieces[i],chessPieces,vec,i);
 								chessPieces[respose].setVisible(true);
 							}
-							eatreturn(respose,i);
 							if(x==chessPieces[respose].getX()&&y==chessPieces[respose].getY())
 							{
 								text.setText("red,can't static");
@@ -477,7 +422,6 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 								rule.willRule(respose,chessPieces[respose],chessPieces[i],chessPieces,vec,i);
 								chessPieces[respose].setVisible(true);
 							}
-							eatreturn(respose,i);
 							if(x==chessPieces[respose].getX()&&y==chessPieces[respose].getY())
 							{
 								text.setText("black,can't static");
@@ -587,19 +531,13 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
 		{
 			System.exit(0);
 		}
-		else if(event.getSource().equals(enter))
-		{
-			String str=null;
-			str=metext.getText();
-			metext.setText("");
-			chattext.setText("me:"+str);
-		}
+
 	}
 	
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mousePressed(MouseEvent arg0) {}
 	public void mouseReleased(MouseEvent arg0) {}
+	
 }
-
 
