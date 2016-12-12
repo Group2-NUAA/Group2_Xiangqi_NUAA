@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
+class pveframe extends JFrame implements ActionListener,MouseListener,Runnable
 {
 	pveRule rule;//class pveRule
 	Vector vec;
@@ -27,7 +27,7 @@ class MainFrame extends JFrame implements ActionListener,MouseListener,Runnable
     static int respose;
     
     
-    MainFrame()
+    pveframe()
     {
     	super("Chinese XiangQi");
     	
