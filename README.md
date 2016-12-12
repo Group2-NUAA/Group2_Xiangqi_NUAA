@@ -130,8 +130,13 @@ public static void readBytes( ); 	//check whether the length of the stream is co
 ANX
 1.Subsystem: AI
 2.Class 
-class AI{
-     public void Eval();   //visit current interface
-     public void Move();   //call the function in rule
-}
-
+AI
+give a value to each chess piece,and then use greedy strategy to find a best move which have highest score.use a stack to store every move so that the AI can process player's regret.
+main routine is
+	NextMove(int label, int x, int y):String,
+this routine get the player's current move, and return AI's solution.It enumerate all the chess pieces that are friendly and alive, call
+		Search(int label):move//{score, label, x, y}
+to search all position they can arrive, and calculate the score for each piece at each position,and finally return the solution which get highest score.
+By using a stack called Situations, the AI class can store every move from the beginning to the current time. When the player regret his last move, call 
+	Regret():void
+to keep sync with the interface,it pop two moves from Situations to restore the move before last move.
