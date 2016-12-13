@@ -4,33 +4,21 @@ py小轩
 Group 2
 
 YY
-1.Subsystem:  graphical  interface
-2.Class:  
-class ChessMainFrame 
-In this class, we will define some variables like these
-player(JLabel)
-chessboard(JLabel)
-toolbar(JToolBar)
-con(Contantainer)
-exit(JButton, to get out)
-regret(JButton, to regret a chess)
-restart(JButton)
-text(JLabel, to display current condition)
-Var(Vector, to save current operate)
-rule(ChessRule, to call the function in the ChessRule)
-chessManClick(Boolean, to judege whether the chess is blink ,in oather word, whether the is clicked)
-chessPlayClick(int, to judge who should run the chess or boss stop)
-blinkThread(Thread,to control the thread of the blink chess)
+I am responsible for the graphical interfaces ,including  MainFrame interface,pvpchess interface,pvechess interface,login register interface and choose interface .
 
-3.Function:
-①	ChessMainFrame()
-The constructor of the class ChessMainFrame.
-We will initialize the graphical interface of xiangqi in this constructor.Include instantiate rule, create toolbar, add exit; regret restart;  text to toolbar.Besides,we will have the function drawChessMan() to add chess label.We will addactionlistener of these chess ;the move of the chess(this is in con)and the chessboard.We will set the size of screen and frame.We will also use function run
-() to use thread to control the blink of the chess,.
-②	mouseClick(MouseEvent m) 
-Its to click chess,first click the chess will blink, then if you click an blank ,it will use the function in rule to move chess,if you click an enemy chess,it will judge whether you can eat it,if you click another chess of yours,the chess will stop blink,the other will blink. 
-③	ActionPerformed(ActionEvent event)
-Its to define the event of the buttons respose.
+I have five class,including MainFrame,pvpframe,pveframe,Login and chooseframe.
+
+The class MainFrame is pvpchess interface, one people can play chess on it(the first is red chess),like I play one red chess,then I can play one black chess,then red,black…,it has function “new game”, “regret”, “exit”.
+
+The class pvpframe is pvpchess interface,it connect the server,so two people can play chess with each other,I add chat function in it,but it does’t work,maybe something wrong in the connection with servers.
+it has function “new game”, “regret”, “exit”.
+
+The class pveframe is pvechess interface,people play red chess,robot play black chess. it has function “new game”, “regret”, “exit”.When people play one chess,robot will play one chess immediately.
+
+The class Login has two function,login and register .I have a connector ,it can send account and password to servers. If login success,this frame will close and the frame for chessboard will appear.However,maybe there is something wrong with this part,so it’s just a interfaces.
+
+The class chooseframe has two button:pve and pvp.If you click pve,this frame will close and pveframe for chessboard will appear.If you click pvp,this frame will close and the frame L0gin will appear.
+
 
 
 
